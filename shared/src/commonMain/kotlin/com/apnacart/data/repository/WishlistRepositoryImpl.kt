@@ -20,8 +20,8 @@ class WishlistRepositoryImpl(
         emit(Resource.Loading())
         try {
             val entities = queries.selectAllWishlistItems().executeAsList()
-            val products = entities.mapNotNull { entity ->
-                val productResource = productRepository.getProductDetail(entity.productId).first()
+            val products = entities.mapNotNull { productId ->
+                val productResource = productRepository.getProductDetail(productId).first()
                 if (productResource is Resource.Success && productResource.data != null) {
                     productResource.data
                 } else null

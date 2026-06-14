@@ -2,7 +2,7 @@ package com.apnacart.data.remote.api
 
 import com.apnacart.util.Constants
 import io.github.jan.supabase.createSupabaseClient
-import io.github.jan.supabase.gotrue.Auth
+import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.postgrest.Postgrest
 
 val supabaseClient = createSupabaseClient(

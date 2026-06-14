@@ -5,9 +5,9 @@ import com.apnacart.domain.model.User
 import com.apnacart.domain.repository.IAuthRepository
 import com.apnacart.util.Resource
 import io.github.jan.supabase.SupabaseClient
-import io.github.jan.supabase.gotrue.auth
-import io.github.jan.supabase.gotrue.providers.builtin.OTP
-import io.github.jan.supabase.gotrue.providers.builtin.Email
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.builtin.OTP
+import io.github.jan.supabase.auth.providers.builtin.Email
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -19,7 +19,7 @@ class AuthRepositoryImpl(
         emit(Resource.Loading())
         try {
             client.auth.verifyEmailOtp(
-                type = io.github.jan.supabase.gotrue.OtpType.Email.MAGIC_LINK,
+                type = io.github.jan.supabase.auth.OtpType.Email.MAGIC_LINK,
                 email = email,
                 token = otp
             )
@@ -55,9 +55,9 @@ class AuthRepositoryImpl(
     override fun getCurrentUser(): Flow<Resource<User>> = flow {
         emit(Resource.Loading())
         try {
-            val session = client.auth.currentSessionOrNull()
-            if (session != null) {
-                emit(Resource.Success(User(id = session.user?.id ?: "", fullName = "User", email = session.user?.email, phone = session.user?.phone, avatarUrl = null)))
+            val user = client.auth.currentUserOrNull()
+            if (user != null) {
+                emit(Resource.Success(User(id = user.id, fullName = "User", email = user.email, phone = user.phone, avatarUrl = null)))
             } else {
                 emit(Resource.Error("No user logged in"))
             }

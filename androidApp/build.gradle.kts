@@ -58,6 +58,14 @@ android {
         }
     }
     
+    sourceSets {
+        getByName("main") {
+            manifest.srcFile("src/main/AndroidManifest.xml")
+            res.srcDirs("src/main/res")
+            java.srcDirs("src/main/kotlin")
+        }
+    }
+    
     buildTypes {
         release {
             isMinifyEnabled = false
