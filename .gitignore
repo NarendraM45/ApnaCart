@@ -1,0 +1,55 @@
+# =============================================
+# ApnaCart — Git Ignore Rules
+# =============================================
+
+# ── IDE ─────────────────────────────────────────
+*.iml
+.gradle/
+.idea/
+.DS_Store
+
+# ── Build Outputs ───────────────────────────────
+/build/
+*/build/
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.aab
+
+# ── Local Configuration (NEVER COMMIT) ─────────
+local.properties
+supabase_credentials.properties
+*.keystore
+*.jks
+
+# ── Environment & Secrets ──────────────────────
+.env
+!.env.example
+backend/.env
+*.pem
+*.key
+
+# ── Python Backend ──────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+*.egg-info/
+dist/
+
+# ── OS Files ────────────────────────────────────
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.swp
+*~
+
+# ── Misc ────────────────────────────────────────
+*.log
+*.tmp
+*.bak
