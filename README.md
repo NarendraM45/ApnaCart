@@ -1,3 +1,4 @@
+
 # ApnaCart 🛒
 
 **Shop Fast, Shop Smart.**
@@ -72,3 +73,4 @@ Contains all business logic and UI:
 
 ## 📄 License
 This project is open-source and available under the MIT License.
+
