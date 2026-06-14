@@ -1,0 +1,40 @@
+CREATE TABLE CartEntity (
+    id TEXT NOT NULL PRIMARY KEY,
+    productId TEXT NOT NULL,
+    quantity INTEGER NOT NULL
+);
+
+CREATE TABLE WishlistEntity (
+    productId TEXT NOT NULL PRIMARY KEY
+);
+
+-- Queries for Cart
+selectAllCartItems:
+SELECT * FROM CartEntity;
+
+insertCartItem:
+INSERT OR REPLACE INTO CartEntity(id, productId, quantity)
+VALUES (?, ?, ?);
+
+updateCartQuantity:
+UPDATE CartEntity SET quantity = ? WHERE id = ?;
+
+deleteCartItem:
+DELETE FROM CartEntity WHERE id = ?;
+
+clearCart:
+DELETE FROM CartEntity;
+
+-- Queries for Wishlist
+selectAllWishlistItems:
+SELECT * FROM WishlistEntity;
+
+insertWishlistItem:
+INSERT OR REPLACE INTO WishlistEntity(productId)
+VALUES (?);
+
+deleteWishlistItem:
+DELETE FROM WishlistEntity WHERE productId = ?;
+
+checkWishlistStatus:
+SELECT count(*) FROM WishlistEntity WHERE productId = ?;
