@@ -21,7 +21,7 @@ data class BottomNavItem(
 
 val bottomNavItems = listOf(
     BottomNavItem(Screen.Home.route, Icons.Default.Home, "Home"),
-    BottomNavItem(Screen.Categories.route, Icons.Default.Category, "Categories"),
+    BottomNavItem(Screen.Categories.route, Icons.Default.List, "Categories"),
     BottomNavItem(Screen.Cart.route, Icons.Default.ShoppingCart, "Cart"),
     BottomNavItem(Screen.Wishlist.route, Icons.Default.Favorite, "Wishlist"),
     BottomNavItem(Screen.Profile.route, Icons.Default.Person, "Profile"),

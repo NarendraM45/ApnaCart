@@ -5,16 +5,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val LightColors = lightColorScheme(
-    primary = SaffronOrange,
-    onPrimary = OffWhite,
-    secondary = DeepNavy,
-    onSecondary = OffWhite,
-    tertiary = GoldenYellow,
-    background = OffWhite,
-    surface = OffWhite,
-    surfaceVariant = LightGray,
+    primary = AmazonNavy,
+    onPrimary = Color.White,
+    secondary = AmazonOrange,
+    onSecondary = Color.White,
+    tertiary = AmazonYellow,
+    background = LightGray,
+    surface = Color.White,
+    surfaceVariant = Color.White,
     onBackground = DarkText,
     onSurface = DarkText,
     error = ErrorRed,
@@ -22,16 +23,16 @@ private val LightColors = lightColorScheme(
 )
 
 private val DarkColors = darkColorScheme(
-    primary = SaffronLight,
-    onPrimary = BackgroundDark,
-    secondary = DeepNavy,
-    onSecondary = OffWhite,
-    tertiary = GoldenYellow,
+    primary = AmazonNavy,
+    onPrimary = Color.White,
+    secondary = AmazonOrange,
+    onSecondary = Color.White,
+    tertiary = AmazonYellow,
     background = BackgroundDark,
     surface = SurfaceDark,
     surfaceVariant = CardDark,
-    onBackground = OffWhite,
-    onSurface = OffWhite,
+    onBackground = Color.White,
+    onSurface = Color.White,
     error = ErrorRed,
     outline = OutlineDark
 )
@@ -41,7 +42,7 @@ fun ApnaCartTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) DarkColors else LightColors
+    val colors = LightColors
 
     MaterialTheme(
         colorScheme = colors,

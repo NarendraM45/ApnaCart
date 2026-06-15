@@ -1,5 +1,6 @@
 package com.apnacart.presentation.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,75 +29,104 @@ fun ProductCard(
 ) {
     Card(
         modifier = modifier
-            .width(160.dp)
+            .width(180.dp)
             .clickable { onProductClick(product.id) },
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline)
     ) {
         Column {
             Box {
                 AsyncImage(
                     model = product.images.firstOrNull(),
                     contentDescription = product.name,
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Inside,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(140.dp)
-                        .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
+                        .height(150.dp)
+                        .background(androidx.compose.ui.graphics.Color.White)
+                        .padding(8.dp)
                 )
                 
                 IconButton(
                     onClick = { onFavoriteClick(product.id) },
-                    modifier = Modifier.align(Alignment.TopEnd)
+                    modifier = Modifier.align(Alignment.TopEnd).size(36.dp)
                 ) {
                     Icon(
                         imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = "Favorite",
-                        tint = if (isFavorite) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+                        tint = if (isFavorite) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.outline,
+                        modifier = Modifier.size(20.dp)
                     )
-                }
-                
-                if (product.discountPercent > 0) {
-                    Surface(
-                        color = MaterialTheme.colorScheme.error,
-                        shape = RoundedCornerShape(4.dp),
-                        modifier = Modifier
-                            .align(Alignment.TopStart)
-                            .padding(8.dp)
-                    ) {
-                        Text(
-                            text = "${product.discountPercent}% OFF",
-                            color = MaterialTheme.colorScheme.onError,
-                            style = MaterialTheme.typography.labelSmall,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                        )
-                    }
                 }
             }
             
-            Column(modifier = Modifier.padding(12.dp)) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                // Title
                 Text(
                     text = product.name,
-                    style = MaterialTheme.typography.titleMedium,
-                    maxLines = 1,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
+                
+                // Ratings
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = product.price.formatAsCurrency(),
-                        style = MaterialTheme.typography.titleMedium,
+                        text = "⭐ ${product.rating}",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.tertiary
+                    )
+                    Text(
+                        text = " (${product.reviewCount})",
+                        style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary
                     )
+                }
+                
+                Spacer(modifier = Modifier.height(2.dp))
+                Text("1K+ bought in past month", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
+                Spacer(modifier = Modifier.height(4.dp))
+                
+                // Price Row
+                Row(verticalAlignment = Alignment.Bottom) {
+                    Text(
+                        text = "₹",
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                    Text(
+                        text = "${product.price.toInt()}",
+                        style = MaterialTheme.typography.titleMedium
+                    )
                     if (product.originalPrice != null) {
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = product.originalPrice.formatAsCurrency(),
-                            style = MaterialTheme.typography.bodySmall,
+                            text = "M.R.P: ₹${product.originalPrice.toInt()}",
+                            style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.outline,
                             textDecoration = androidx.compose.ui.text.style.TextDecoration.LineThrough
                         )
                     }
+                }
+                
+                // Delivery
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "FREE Delivery by ApnaCart",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.outline
+                )
+                
+                // CTA
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(
+                    onClick = { /* Add to cart stub */ },
+                    modifier = Modifier.fillMaxWidth().height(36.dp),
+                    shape = RoundedCornerShape(50),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.tertiary)
+                ) {
+                    Text("Add to cart", color = MaterialTheme.colorScheme.onBackground, style = MaterialTheme.typography.labelMedium)
                 }
             }
         }

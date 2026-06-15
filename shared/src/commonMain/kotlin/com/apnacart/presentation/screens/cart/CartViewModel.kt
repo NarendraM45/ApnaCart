@@ -38,7 +38,7 @@ class CartViewModel(
 
     fun updateQuantity(item: CartItem, newQty: Int) {
         viewModelScope.launch {
-            cartRepository.updateQuantity(item.productId, newQty).collect { }
+            cartRepository.updateQuantity(item.id, newQty).collect { }
             loadCart()
         }
     }
