@@ -10,7 +10,6 @@ import com.apnacart.presentation.screens.auth.LoginViewModel
 import com.apnacart.presentation.screens.cart.CartViewModel
 import com.apnacart.presentation.screens.home.HomeViewModel
 import com.apnacart.presentation.screens.product_detail.ProductDetailViewModel
-import com.apnacart.presentation.screens.splash.SplashViewModel
 import org.koin.dsl.module
 import org.koin.core.module.dsl.viewModel
 
@@ -39,7 +38,6 @@ fun getSharedModule() = module {
     factory { GetOrdersUseCase(get()) }
     
     // ViewModels
-    viewModel { SplashViewModel() }
     viewModel { LoginViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { ProductDetailViewModel(get(), get(), get()) }
