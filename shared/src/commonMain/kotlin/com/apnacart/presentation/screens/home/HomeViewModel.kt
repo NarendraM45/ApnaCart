@@ -10,6 +10,7 @@ import com.apnacart.util.Resource
 import com.apnacart.util.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class HomeState(
@@ -32,27 +33,27 @@ class HomeViewModel(
         viewModelScope.launch {
             productRepository.getBanners().collect { resource ->
                 when (resource) {
-                    is Resource.Loading -> _state.value = _state.value.copy(banners = UiState.Loading)
-                    is Resource.Success -> _state.value = _state.value.copy(banners = UiState.Success(resource.data ?: emptyList()))
-                    is Resource.Error -> _state.value = _state.value.copy(banners = UiState.Error(resource.message ?: "Error"))
+                    is Resource.Loading -> _state.update { it.copy(banners = UiState.Loading) }
+                    is Resource.Success -> _state.update { it.copy(banners = UiState.Success(resource.data ?: emptyList())) }
+                    is Resource.Error -> _state.update { it.copy(banners = UiState.Error(resource.message ?: "Error")) }
                 }
             }
         }
         viewModelScope.launch {
             productRepository.getCategories().collect { resource ->
                 when (resource) {
-                    is Resource.Loading -> _state.value = _state.value.copy(categories = UiState.Loading)
-                    is Resource.Success -> _state.value = _state.value.copy(categories = UiState.Success(resource.data ?: emptyList()))
-                    is Resource.Error -> _state.value = _state.value.copy(categories = UiState.Error(resource.message ?: "Error"))
+                    is Resource.Loading -> _state.update { it.copy(categories = UiState.Loading) }
+                    is Resource.Success -> _state.update { it.copy(categories = UiState.Success(resource.data ?: emptyList())) }
+                    is Resource.Error -> _state.update { it.copy(categories = UiState.Error(resource.message ?: "Error")) }
                 }
             }
         }
         viewModelScope.launch {
             productRepository.getProducts().collect { resource ->
                 when (resource) {
-                    is Resource.Loading -> _state.value = _state.value.copy(featuredProducts = UiState.Loading)
-                    is Resource.Success -> _state.value = _state.value.copy(featuredProducts = UiState.Success(resource.data ?: emptyList()))
-                    is Resource.Error -> _state.value = _state.value.copy(featuredProducts = UiState.Error(resource.message ?: "Error"))
+                    is Resource.Loading -> _state.update { it.copy(featuredProducts = UiState.Loading) }
+                    is Resource.Success -> _state.update { it.copy(featuredProducts = UiState.Success(resource.data ?: emptyList())) }
+                    is Resource.Error -> _state.update { it.copy(featuredProducts = UiState.Error(resource.message ?: "Error")) }
                 }
             }
         }

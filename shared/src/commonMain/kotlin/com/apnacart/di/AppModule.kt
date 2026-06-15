@@ -6,7 +6,6 @@ import com.apnacart.data.remote.api.supabaseClient
 import com.apnacart.data.repository.*
 import com.apnacart.domain.repository.*
 import com.apnacart.domain.usecase.*
-import com.apnacart.presentation.screens.auth.LoginViewModel
 import com.apnacart.presentation.screens.cart.CartViewModel
 import com.apnacart.presentation.screens.home.HomeViewModel
 import com.apnacart.presentation.screens.product_detail.ProductDetailViewModel
@@ -38,8 +37,9 @@ fun getSharedModule() = module {
     factory { GetOrdersUseCase(get()) }
     
     // ViewModels
-    viewModel { LoginViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { ProductDetailViewModel(get(), get(), get()) }
     viewModel { CartViewModel(get()) }
+    viewModel { com.apnacart.presentation.screens.wishlist.WishlistViewModel() }
+    viewModel { com.apnacart.presentation.screens.profile.ProfileViewModel() }
 }
